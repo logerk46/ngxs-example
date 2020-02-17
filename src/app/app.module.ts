@@ -12,6 +12,7 @@ import { NgxsModule } from '@ngxs/store';
 import { ArticleState } from './articles/state/article.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
       ArticleState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot()
+    NgxsLoggerPluginModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

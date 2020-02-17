@@ -19,4 +19,9 @@ export namespace ArticleActions {
     export class getArticles {
         static readonly type = '[ARTICLE] Get'
     }
+
+    export class FilterOnChange {
+        static readonly type = '[ARTICLE] Filter set'
+        constructor(public payload: number) { }
+    }
 }

@@ -14,11 +14,11 @@ import { ArticleActions } from '../state/article.actions';
     </div>`
 })
 export class ArticleCreateComponent implements OnInit {
-    constructor(private store: Store) {}
+    constructor(private store: Store) { }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
 
-    addArticle(name, description){
-        this.store.dispatch(new ArticleActions.AddArticle({id:  Math.floor(Math.random() * 2800), title: name, description: description}))
+    addArticle(name, description) {
+        this.store.dispatch(new ArticleActions.AddArticle({ id: Math.floor(Math.random() * 2800), title: name, description: description, status: 0 }))
     }
 }   

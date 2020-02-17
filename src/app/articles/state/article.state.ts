@@ -7,22 +7,38 @@ import { ArticlesService } from 'src/app/services/articles.service';
 
 export class ArticleStateModel {
     articles: Article[];
+    filterStatus: number;
 }
 
 @State<ArticleStateModel>({
     name: 'articles',
     defaults: {
-        articles: []
-    }
+        articles: [],
+        filterStatus: 0
+    },
 })
 
 export class ArticleState {
 
-    constructor(private articlesService: ArticlesService) {}
+    constructor(private articlesService: ArticlesService) { }
+
+    @Selector()
+    static filteredArticles(state: ArticleStateModel) {
+        return state.articles.filter(a => a.status == state.filterStatus);
+    }
 
     @Selector()
     static getArticlesList(state: ArticleStateModel) {
         return state.articles;
+    }
+
+    @Action(ArticleActions.FilterOnChange)
+    updateFilter(ctx: StateContext<ArticleStateModel>, { payload }: ArticleActions.FilterOnChange) {
+        ctx.setState(
+            patch({
+                filterStatus: payload
+            })
+        )
     }
 
     @Action(ArticleActions.getArticles)

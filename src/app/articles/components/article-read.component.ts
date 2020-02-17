@@ -11,6 +11,10 @@ import { ArticleActions } from '../state/article.actions';
     template: `
     <div class="articles_wrapper">
     <h3>Articles</h3>
+    <select (change)="onChange($event.target.value)">
+        <option value="0">Active</option>
+        <option value="1">Completed</option>
+    </select>
         <div *ngFor="let article of articles | async">
             <div (click)="edit = article.id">{{article.title}}</div>
             <div>{{article.description}}</div> 
@@ -21,11 +25,15 @@ import { ArticleActions } from '../state/article.actions';
 })
 export class ArticleReadComponent implements OnInit {
     edit: boolean = false;
-    @Select(ArticleState.getArticlesList) articles: Observable<Article[]>;
+    @Select(ArticleState.filteredArticles) articles: Observable<Article[]>;
 
-    constructor(private articlesService: ArticlesService,private store: Store){}
+    constructor(private articlesService: ArticlesService, private store: Store) { }
 
     ngOnInit(): void {
         this.store.dispatch(new ArticleActions.getArticles());
+    }
+
+    onChange($event): void {
+        this.store.dispatch(new ArticleActions.FilterOnChange($event));
     }
 }
